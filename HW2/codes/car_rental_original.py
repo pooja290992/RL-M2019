@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 from tqdm import trange 
+from mpl_toolkits.mplot3d import Axes3D
 
 
 # In[2]:
@@ -152,11 +153,35 @@ class CarRental:
 
 
 
-# In[ ]:
+# In[3]:
+
+
+def plot3dValues(values):
+    x = np.arange(21)
+    y = np.arange(21)
+    x,y = np.meshgrid(x,y)
+    fig = plt.figure(figsize=(15,10))
+    ax = fig.gca(projection='3d')
+    surf = ax.plot_surface(x,y,values,rstride=1,cstride=1,cmap='hot',linewidth=0,antialiased=False)
+    ax.set_xlabel('# cars at location 1')
+    ax.set_ylabel('# cars at location 2')
+    ax.set_title('Optimal Value')
+    fig.colorbar(surf,shrink = 0.5, aspect = 5)
+    plt.show()
+
+
+# In[4]:
 
 
 car = CarRental()
 car.figure_4_2()
+
+
+# In[5]:
+
+
+values = car.getValues()
+plot3dValues(values)
 
 
 # In[ ]:

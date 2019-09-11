@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[16]:
 
 
 import matplotlib
@@ -11,9 +11,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 from tqdm import trange 
+from mpl_toolkits.mplot3d import Axes3D
 
 
-# In[4]:
+# In[2]:
 
 
 class CarRental:
@@ -166,6 +167,38 @@ class CarRental:
 
 car = CarRental()
 car.exercise_4_7()
+
+
+# In[41]:
+
+
+def plot3dValues(values):
+    x = np.arange(21)
+    y = np.arange(21)
+    x,y = np.meshgrid(x,y)
+    fig = plt.figure(figsize=(15,10))
+    ax = fig.gca(projection='3d')
+    surf = ax.plot_surface(x,y,values,rstride=1,cstride=1,cmap='hot',linewidth=0,antialiased=False)
+    ax.set_xlabel('# cars at location 1')
+    ax.set_ylabel('# cars at location 2')
+    ax.set_title('Optimal Value')
+    fig.colorbar(surf,shrink = 0.5, aspect = 5)
+    plt.show()
+
+
+# In[42]:
+
+
+values = car.getValues()
+plot3dValues(values)
+# fig = plt.figure()
+# # ax = fig.gca(projection='3d')
+
+
+# In[15]:
+
+
+print(values)
 
 
 # In[ ]:
